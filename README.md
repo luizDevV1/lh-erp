@@ -35,3 +35,9 @@ como um **_websocket_** para backend ou um **_componente_** instalável para o f
 
 ## Status do projeto
 - O projeto foi inicilizado com 19/12/2022.
+
+## Projetos e configurações [ Backend ]
+| Projeto       | Porta      |
+|---------------|------------|
+| user-control  | 17001:3001 |
+| stock-control | 17002:3002 |
