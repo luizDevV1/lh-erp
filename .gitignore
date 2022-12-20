@@ -2,6 +2,7 @@
 .fleet
 .idea
 node_modules
+.vscode
 
 # Environment
 .env
