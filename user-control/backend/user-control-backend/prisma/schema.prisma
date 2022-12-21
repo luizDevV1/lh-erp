@@ -1,0 +1,53 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  uuid        String   @id @default(uuid())
+  email       String   @unique
+  username    String   @unique
+  password    String
+  salt        Salt     @relation(fields: [salt_uuid], references: [uuid])
+  salt_uuid   String   @unique
+  people      People?  @relation(fields: [people_uuid], references: [uuid])
+  people_uuid String   @unique
+  create_at   DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  active      Boolean  @default(true)
+
+  @@map("erp_lh_users")
+}
+
+model Salt {
+  uuid       String   @id @default(uuid())
+  salt       String
+  User       User?
+  create_at  DateTime @default(now())
+  updated_at DateTime @updatedAt
+  active     Boolean  @default(true)
+
+  @@map("erp_lh_salts")
+}
+
+model People {
+  uuid        String   @id @default(uuid())
+  fistname    String
+  lastname    String
+  cpf         String   @unique @db.VarChar(11)
+  observation String?
+  birhday     DateTime
+  User        User?
+  create_at   DateTime @default(now())
+  updated_at  DateTime @updatedAt
+  active      Boolean  @default(true)
+
+  @@map("erp_lh_peoples")
+}
